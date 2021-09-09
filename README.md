@@ -1,6 +1,7 @@
 # MERN Stack Social Media App
 
 -   Based on project by [LamaDev](https://www.youtube.com/watch?v=ldGl6L4Vktk&list=PLj-4DlPRT48lXaz5YLvbLC38m25W9Kmqy)
+-   View the Front end [here](https://github.com/kawgh1/mern-social-media-react)
 
 ## Tools Used
 

@@ -84,6 +84,7 @@ router.get("/timeline/all", async (req, res) => {
 				return Post.find({ userId: friendId });
 			})
 		);
+		// return all of my currentUser posts PLUS the posts of everyone I currentUser follow
 		res.json(userPosts.concat(...friendPosts));
 	} catch (err) {
 		res.status(500).json(err);

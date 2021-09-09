@@ -10,6 +10,7 @@ const morgan = require("morgan");
 // Route Configs
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
+const postRoute = require("./routes/posts");
 
 // setup dotenv
 dotenv.config();
@@ -34,8 +35,9 @@ app.use(morgan("common"));
 // });
 
 // Set routes
-app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/posts", postRoute);
 
 // set to listen on port 8800
 app.listen(8800, () => {

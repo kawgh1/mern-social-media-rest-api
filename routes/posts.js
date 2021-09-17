@@ -74,9 +74,9 @@ router.get("/:id", async (req, res) => {
 
 //get timeline posts
 
-router.get("/timeline/all", async (req, res) => {
+router.get("/timeline/:userId", async (req, res) => {
 	try {
-		const currentUser = await User.findById(req.body.userId);
+		const currentUser = await User.findById(req.params.userId);
 		const userPosts = await Post.find({ userId: currentUser._id });
 		// use Promise.all because there are multiple promises when we use 'map' - wont work otherwise
 		const friendPosts = await Promise.all(
@@ -85,7 +85,7 @@ router.get("/timeline/all", async (req, res) => {
 			})
 		);
 		// return all of my currentUser posts PLUS the posts of everyone I currentUser follow
-		res.json(userPosts.concat(...friendPosts));
+		res.status(200).json(userPosts.concat(...friendPosts));
 	} catch (err) {
 		res.status(500).json(err);
 	}

@@ -4,9 +4,9 @@ const User = require("../models/User");
 // Bcrypt
 const bcrypt = require("bcrypt");
 
-router.get("/", (req, res) => {
-	res.send("Hey it's userRoutes");
-});
+// router.get("/", (req, res) => {
+// 	res.send("Hey it's userRoutes");
+// });
 
 // UPDATE USER - PUT
 router.put("/:id", async (req, res) => {

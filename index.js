@@ -7,6 +7,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 
+// multer for uploading images
 const multer = require("multer");
 const router = express.Router();
 const path = require("path");
@@ -24,7 +25,8 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
 	console.log("connected to MongoDB Cloud!");
 });
 
-// set assets
+// set REST API path to assets for access from front-end client
+// so if user goes to localhost:8800/images/ad.png -> direct user to localhost:8800/public/images/ad.png
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // Middleware
@@ -41,12 +43,13 @@ app.use(morgan("common"));
 // 	res.send("Welcome to Users Page");
 // });
 
-// storage and file upload
+// MULTER - storage and file upload
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, "public/images");
 	},
 	filename: (req, file, cb) => {
+		// req.body.name is coming from clientside user post
 		cb(null, req.body.name);
 	},
 });

@@ -33,4 +33,14 @@
                 "start": "nodemon index.js"
                 },
 -   ### Bcrypt
+
     -   For password hashing in database
+
+-   ### Multer
+
+    -   When a user uploads an image on a post, it goes to the backend Node server
+    -   Obviously this is a horrible idea for a production social media app
+        -   Should use AWS S3 or similar, but this is for demo and simplicity
+    -   Using Multer package
+        -   Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files. It is written on top of busboy for maximum efficiency.
+    -   https://www.npmjs.com/package/multer

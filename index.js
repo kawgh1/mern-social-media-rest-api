@@ -16,13 +16,15 @@ const path = require("path");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const conversationRoute = require("./routes/conversations");
+const messageRoute = require("./routes/messages");
 
 // setup dotenv
 dotenv.config();
 
 // mongoose connection
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
-	console.log("connected to MongoDB Cloud!");
+    console.log("connected to MongoDB Cloud!");
 });
 
 // set REST API path to assets for access from front-end client
@@ -45,30 +47,32 @@ app.use(morgan("common"));
 
 // MULTER - storage and file upload
 const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, "public/images");
-	},
-	filename: (req, file, cb) => {
-		// req.body.name is coming from clientside user post
-		cb(null, req.body.name);
-	},
+    destination: (req, file, cb) => {
+        cb(null, "public/images");
+    },
+    filename: (req, file, cb) => {
+        // req.body.name is coming from clientside user post
+        cb(null, req.body.name);
+    },
 });
 
 const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
-	try {
-		return res.status(200).json("File uploaded successfully");
-	} catch (error) {
-		console.error(error);
-	}
+    try {
+        return res.status(200).json("File uploaded successfully");
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 // Set routes
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
+app.use("/api/conversations", conversationRoute);
+app.use("/api/messages", messageRoute);
 
 // set to listen on port 8800
 app.listen(8800, () => {
-	console.log("Backend server is running!");
+    console.log("Backend server is running!");
 });
